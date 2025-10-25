@@ -1,8 +1,8 @@
-# dino/clip style fasion 
+# dino/clip style fashion 
 
 ## 프로젝트 개요
 **DINO 모델을 활용한 패션 이미지 유사도 추천 웹 서비스**. <br>
-사용자가 업로드한 패션과 유사한 스타일의 이미지를 자동 추천. 비슷한 패션 아이템을 손쉽게 탐색할 수 있는 시각적 검색 서비스. 이 문서는 모델 학습부터 실제 사용까지의 과정을 안내합니다.
+이 프로젝트는 DINOv2와 CLIP 모델을 활용하여 사용자가 업로드한 패션 이미지와 시각적 또는 의미적으로 유사한 스타일의 이미지를 찾아주는 웹 애플리케이션입니다.
 
 ---
 
@@ -46,14 +46,86 @@ pip install torch transformers pillow flask pymongo chromadb
 
 ---
 
-### 데이터셋
-- 학습에 사용된 데이터셋은 Roboflow에서 제공하는 "Fish-breeds" 데이터셋입니다.
+### 구조
 
-- 클래스 수: 7개 (nc: 7)
+```
 
-- 클래스 이름: ['blue-tang', 'butterflyfish', 'clownfish', 'moorish-idol', 'neon-tetra', 'ribboned-sweetlips', 'yellow-tang']
+# DINO 모델을 이용해 업로드한 옷 이미지와 유사한 옷을 추천해주는 Flask 웹서비스
+# mongoDb 터미널에서 실행 -> brew services start mongodb-community
 
-- 데이터셋 경로: data.yaml 파일에 명시되어 있으며, 학습, 검증, 테스트 데이터 경로가 포함되어 있습니다.
+dino-style-fashion/
+│
+├── app.py                        
+│   └─ Flask 웹 서버의 메인 진입점
+│      - 이미지 업로드 처리
+│      - DINO 모델과 DB를 연결
+│      - 추천 결과를 HTML로 렌더링
+│
+├── templates/
+│   └── index.html                
+│      - 메인 웹페이지 UI
+│      - 이미지 업로드 폼, 추천 결과 표시
+│
+├── static/
+│   ├── uploads/                  
+│      - 사용자가 업로드한 이미지 저장 폴더
+│   ├── recommend/                  
+│      - 추천 결과 이미지를 임시 저장
+│
+├── models/
+│   └── dino_model.py             
+│      - DINO 모델 불러오기
+│      - 이미지 임베딩(벡터) 추출 기능 제공
+|   ├── clip_model.py (이미지 캡션 기능)
+│
+├── utils/
+│   └── chroma_utils.py           
+│      - ChromaDB 초기화 및 관리
+│      - 벡터 유사도 검색 함수 포함
+│
+├── database/
+│   └── mongo_db.py               
+│      - MongoDB 연결 설정
+│      - 이미지 메타데이터 저장 / 조회 함수
+│
+├── scripts/
+│   ├── init_reference_images.py  
+│      - 초기 reference 이미지 등록 스크립트
+│   ├── check_chroma.py           
+│      - ChromaDB 데이터 점검용
+│   └── debug_chroma.py           
+│      - 유사도 검색 디버깅용 (테스트 실행)
+│
+└── data/
+    └── reference_images/      
+       - reference_images.py    
+       - 비교용 원본 이미지 데이터 저장소
+
+
+# 실제 구현 되는 서비스 설계도
+[사용자 업로드]
+        │
+        ▼
+templates/index.html
+        │
+        ▼
+app.py
+ ├─ (1) 업로드 이미지 저장 → static/uploads/
+ ├─ (2) DINO 모델 호출 (models/dino_model.py)
+ │      └─ 이미지 임베딩 추출
+ ├─ (3) ChromaDB 검색 (utils/chroma_utils.py)
+ │      └─ 유사도 높은 이미지의 mongo_id 리스트 반환
+ ├─ (4) MongoDB 조회 (database/mongo_db.py)
+ │      └─ 해당 mongo_id로 실제 이미지 가져오기
+ │      └─ static/recommend/{mongo_id}.jpg 로 임시 저장
+ └─ (5) 결과를 index.html 로 전달 (render_template)
+        │
+        ▼
+templates/index.html
+ └─ 업로드 이미지 + 추천 결과 이미지 렌더링
+
+
+```
 
 ### YAML
 
