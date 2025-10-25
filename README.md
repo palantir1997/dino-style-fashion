@@ -137,11 +137,10 @@ templates/index.html
 
 ### Python API로 학습
 
-#### 파이썬 API로 실행 default(epoch15) 테스트
+#### 파이썬 API로 실행 
 ```
 >>> python app.py
 → 브라우저에서 http://127.0.0.1:5000 접속
-
 ```
 
 ---
