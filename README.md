@@ -139,13 +139,7 @@ templates/index.html
 
 #### 파이썬 API로 실행 default(epoch15) 테스트
 ```
->>> python
->>> python scripts/register_reference_images.py
-
-→ DINO 임베딩 생성 후 MongoDB와 ChromaDB에 저장됩니다.
-
 >>> python app.py
-
 → 브라우저에서 http://127.0.0.1:5000 접속
 
 ```
@@ -153,11 +147,8 @@ templates/index.html
 ---
 
 #### 실행결과
-<img width="2245" height="1604" alt="Image" src="https://github.com/user-attachments/assets/91d58423-e695-4bc5-bc8f-786d48c27ce3" />
-
-<img width="3000" height="2250" alt="Image" src="https://github.com/user-attachments/assets/8facdcab-bf2f-4641-9249-9f6af8472fe4" />
-
-<img width="2400" height="1200" alt="Image" src="https://github.com/user-attachments/assets/3410c8a2-c301-4853-8cc5-a5b29be14b23" />
+<img width="895" height="798" alt="Image" src="https://github.com/user-attachments/assets/5f2f8b93-da2e-4cf1-8d8c-6afd1e594d7b" />
+<img width="974" height="624" alt="Image" src="https://github.com/user-attachments/assets/4a0571af-b186-4e58-a141-fd0bb26a5904" />
 
 ---
 
