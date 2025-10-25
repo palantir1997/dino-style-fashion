@@ -1,5 +1,5 @@
 # dino/clip style fashion 
-
+<img width="1170" height="626" alt="Image" src="https://github.com/user-attachments/assets/b01c5fb9-b2c4-4177-88b1-e34e90fed157" />
 ## 프로젝트 개요
 **DINO 모델을 활용한 패션 이미지 유사도 추천 웹 서비스**. <br>
 이 프로젝트는 DINOv2와 CLIP 모델을 활용하여 사용자가 업로드한 패션 이미지와 시각적 또는 의미적으로 유사한 스타일의 이미지를 찾아주는 웹 애플리케이션입니다.
@@ -127,6 +127,9 @@ templates/index.html
 
 ```
 
+![Image](https://github.com/user-attachments/assets/0b85cb49-e035-4a07-a9ee-d10c9a80ef2f)
+![Image](https://github.com/user-attachments/assets/25bc14fa-84fc-48cb-8cb6-f0270e3a13eb)
+
 ---
 
 ### Python API로 학습
@@ -155,72 +158,6 @@ templates/index.html
 
 ---
 
-## 모델 추론 및 사용
-학습이 완료되면 runs/detect/train/weights/best.pt 경로에 최적의 모델 가중치 파일이 저장됩니다. 이 파일을 사용해 이미지, 동영상 등 다양한 소스에 대한 객체 탐지를 수행할 수 있습니다.
-
-### 1. 이미지 또는 폴더에 대한 추론
-
-```
-- 1. 학습된 모델 로드(필자는 13, 15, 17에 각각 학습시켰던 결과가 runs파일안에 있었음)
->>> model = YOLO(r"C:/Users/User/runs/detect/train15/weights/best.pt")
-
-- 2. 이미지 폴더에 대한 예측 수행 및 결과 저장
->>> results = model.predict(source=r"C:/Users/User/your_url/Fish-breeds/test/images", save=True, conf=0.25) # 임계점 0.25
-
-- 3. 결과 하나 확인
->>> results[0].show()
-
-- 여러개 확인하고 싶을 시 for문 사용
-
-```
-
-### 2. 동영상 파일에 대한 추론
-
-```
-- 학습된 모델 로드
->>> model = YOLO(r"C:/Users/User/runs/detect/train15/weights/best.pt")
-
-- 비디오 파일 경로
->>> video_path = r"C:\Users\User\your_url\test_video\fish2.mp4"
-
-- 비디오에 대한 예측 수행 및 결과 저장
->>> results = model.predict(source=video_path, save=True, conf=0.25)
-
-```
-
-###  3. OpenCV와 연동하여 실시간 추론 및 시각화
-```
-OpenCV를 사용하면 비디오 프레임별로 예측 결과를 시각적으로 표시할 수 있습니다. 경계 상자 외에 물고기의 중심점을 표시하고 클래스 이름 텍스트를 추가하는 기능을 포함합니다.
-
-from ultralytics import YOLO
-import cv2
-model = YOLO(r"C:\Users\User\runs\detect\train15\weights\best.pt")
-cap = cv2.VideoCapture(r"C:\Users\User\your_url\test_video\fish2.mp4")
-frameCount = 0
-while (True) :
-    ret, frame = cap.read()
-    if (not(ret)) : break
-    
-    frame = cv2.resize(frame, dsize=(640, 360))
-    result = model.predict(source=frame, show=True, verbose=False, stream=False, conf=0.7, imgsz=640)
-    res = result[0]  # cap.read()에서 한장의 이미지 프레임만 읽어 예측했기 때문에, result[0]
-
-    for box in res.boxes :
-        print(f"FrameCount = {frameCount}, {box.data.cpu().numpy()}")
-        npp = box.xyxy.cpu().numpy()
-        npcls = box.cls.cpu().numpy()
-        cx = int((npp[0][0]+npp[0][2])/2)
-        cy = int((npp[0][1]+npp[0][3])/2)
-        frame = cv2.circle(frame, (cx, cy),30, (0,255,255), 3)
-        cv2.putText(frame, res.names[npcls[0]] , org=(cx,cy), color=(0,255,0), fontScale=1, thickness=2, lineType = cv2.LINE_AA, fontFace=cv2.FONT_HERSHEY_SIMPLEX)
-        cv2.imshow('Detected Object', frame) 
-        if (cv2.waitKey(1) == 27) :
-            break
-        frameCount += 1
-cap.release()
-cv2.destroyAllWindows()
-
-```
 
 
 
