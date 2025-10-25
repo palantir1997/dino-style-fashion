@@ -3,7 +3,7 @@ import random
 import shutil
 
 # 원본 이미지 경로
-source_dir = "/Volumes/YS_USB/archive/images"
+source_dir = "/Volumes/archive/images"
 # Flask 프로젝트 내 참조 이미지 경로
 target_dir = "data/reference_images"
 # 무작위로 가져올 이미지 수
