@@ -127,47 +127,28 @@ templates/index.html
 
 ```
 
-### YAML
-
-```
-train: C:/Users/User/your_url/Fish-breeds/train/images
-val: C:/Users/User/your_url/Fish-breeds/valid/images
-test: C:/Users/User/your_url/Fish-breeds/test/images
-Roboflow URL: https://universe.roboflow.com/licenta-ldbud/fish-breeds-aeg36/dataset/9
-```
-
 ---
-
-## 모델 학습
-YOLOv8 모델을 학습시키는 방법은 두 가지가 있습니다: CLI(명령어 창) 방식과 Python API 방식.
 
 ### Python API로 학습
 
 #### 파이썬 API로 실행 default(epoch15) 테스트
 ```
 >>> python
->>> model = YOLO(r"C:\Users\User\your_url\yolov8n.pt")
->>> result = model.train(data=r"C:\Users\User\your_url\data.yaml", epochs=15)
+>>> python scripts/register_reference_images.py
+
+→ DINO 임베딩 생성 후 MongoDB와 ChromaDB에 저장됩니다.
+
+>>> python app.py
+
+→ 브라우저에서 http://127.0.0.1:5000 접속
+
 ```
 
-#### scratch(epochs=30 batch=16) 테스트
-```
->>> python
->>> model = YOLO(r"C:\Users\User\your_url\yolov8n.pt")
->>> result = model.train(data='data.yaml', epochs=30, batch=16)
-```
+---
 
-#### freeze(epochs=30 freeze=10 batch=16) 테스트
-```
->>> python
->>> model = YOLO(r"C:\Users\User\your_url\yolov8n.pt")
->>> result = model.train(data=r"C:\Users\User\your_url\data.yaml", epochs=30, freeze=10, batch=16)
-```
-
-#### 3개 데이터 모델 결과
+#### 실행결과
 <img width="2245" height="1604" alt="Image" src="https://github.com/user-attachments/assets/91d58423-e695-4bc5-bc8f-786d48c27ce3" />
 
-#### 마지막 freeze 테스트 결과
 <img width="3000" height="2250" alt="Image" src="https://github.com/user-attachments/assets/8facdcab-bf2f-4641-9249-9f6af8472fe4" />
 
 <img width="2400" height="1200" alt="Image" src="https://github.com/user-attachments/assets/3410c8a2-c301-4853-8cc5-a5b29be14b23" />
