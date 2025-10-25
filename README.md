@@ -1,5 +1,8 @@
 # dino/clip style fashion 
 <img width="1170" height="626" alt="Image" src="https://github.com/user-attachments/assets/b01c5fb9-b2c4-4177-88b1-e34e90fed157" />
+
+---
+
 ## 프로젝트 개요
 **DINO 모델을 활용한 패션 이미지 유사도 추천 웹 서비스**. <br>
 이 프로젝트는 DINOv2와 CLIP 모델을 활용하여 사용자가 업로드한 패션 이미지와 시각적 또는 의미적으로 유사한 스타일의 이미지를 찾아주는 웹 애플리케이션입니다.
