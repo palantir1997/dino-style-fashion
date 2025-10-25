@@ -1,7 +1,7 @@
 # DINO 모델을 이용해 업로드한 옷 이미지와 유사한 옷을 추천해주는 Flask 웹서비스
 # mongoDb 터미널에서 실행 -> brew services start mongodb-community
 
-dino-style-fasion/
+dino-style-fashion/
 │
 ├── app.py                        
 │   └─ Flask 웹 서버의 메인 진입점
