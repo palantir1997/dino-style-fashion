@@ -1,5 +1,11 @@
 # dino/clip style fashion 
-<img width="1170" height="626" alt="Image" src="https://github.com/user-attachments/assets/b01c5fb9-b2c4-4177-88b1-e34e90fed157" />
+<iframe width="1170" height="626"
+  src="https://www.youtube.com/embed/J3t5VXPHOt4"
+  title="DINO/CLIP Fashion Demo"
+  frameborder="0"
+  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+  allowfullscreen>
+</iframe>
 
 ---
 
