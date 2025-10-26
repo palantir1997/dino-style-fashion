@@ -1,11 +1,5 @@
 # dino/clip style fashion 
-<iframe width="1170" height="626"
-  src="https://www.youtube.com/embed/J3t5VXPHOt4"
-  title="DINO/CLIP Fashion Demo"
-  frameborder="0"
-  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-  allowfullscreen>
-</iframe>
+[![DINO/CLIP Fashion Demo](https://img.youtube.com/vi/J3t5VXPHOt4/0.jpg)](https://www.youtube.com/watch?v=J3t5VXPHOt4)
 
 ---
 
